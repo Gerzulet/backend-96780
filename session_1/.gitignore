@@ -1,0 +1,21 @@
+# No commitear archivos .env con secretos
+.env
+.env.local
+.env.*.local
+
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Dependency directories
+node_modules/
