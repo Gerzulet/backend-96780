@@ -14,5 +14,5 @@ console.log('DB_HOST:', dbHost)
 console.log('NODE_ENV:', nodeEnv)
 console.log('')
 
-// Las variables de entorno siempre son strings
+// Las variables de entorno siempre son strings, por ende es conveniente parsear estos valores posteriormente.
 console.log('Tipo de PORT:', typeof port)

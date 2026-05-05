@@ -5,6 +5,7 @@
 import 'dotenv/config'
 
 function getNumberEnv(key, defaultValue) {
+  // la sintaxis process.env[key] nos permite seleccionar la variable de entorno por su nombre
   const value = process.env[key]
   if (value === undefined) return defaultValue
   const parsed = Number(value)

@@ -7,7 +7,7 @@ import 'dotenv/config'
 
 console.log('=== Ejemplo INCORRECTO 4: Modificando process.env ===')
 
-// ❌ Modificar process.env en tiempo de ejecución
+// ❌ probibido hacer esto
 process.env.MY_DYNAMIC_VAR = 'some value'
 process.env.PORT = '9999'
 

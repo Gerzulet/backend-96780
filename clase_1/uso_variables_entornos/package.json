@@ -1,0 +1,26 @@
+{
+  "name": "node-env-vars-examples",
+  "version": "1.0.0",
+  "description": "Ejemplos de uso correcto e incorrecto de variables de entorno con Node.js",
+  "type": "module",
+  "scripts": {
+    "correcto:basico": "node usos_correctos/01-uso-basico.js",
+    "correcto:defaults": "node usos_correctos/02-con-valores-por-defecto.js",
+    "correcto:tipado": "node usos_correctos/03-validando_tipado.js",
+    "incorrecto:sindotenv": "node usos_incorrectos/01-sin-dotenv.js",
+    "incorrecto:hardcodeados": "node usos_incorrectos/02-secretos-hardcodeados.js",
+    "incorrecto:sinvalidacion": "node usos_incorrectos/03-sin-validacion.js",
+    "incorrecto:globales": "node usos_incorrectos/04-variables-globales.js",
+    "start": "node app-express/app.js",
+    "dev": "nodemon app-express/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

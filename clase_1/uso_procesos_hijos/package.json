@@ -1,0 +1,15 @@
+{
+  "name": "child-process-fork-examples",
+  "version": "1.0.0",
+  "description": "Ejemplos de uso de child_process.fork() para evitar bloquear el hilo principal",
+  "type": "module",
+  "scripts": {
+    "incorrecto:basico": "node usos_incorrectos/01-bloqueando-hilo-principal.js",
+    "incorrecto:con_servidor": "node usos_incorrectos/02-servidor-bloqueado.js",
+    "correcto:basico": "node usos_correctos/01-fork-basico.js",
+    "correcto:con_servidor": "node usos_correctos/02-servidor-no-bloqueante.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
