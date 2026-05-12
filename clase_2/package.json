@@ -1,0 +1,21 @@
+{
+  "name": "clase-2-middlewares-y-optimizacion",
+  "version": "1.0.0",
+  "description": "Clase práctica: Compresión HTTP, Cache Control, Request Logging, Normalización de respuestas y Manejo de errores",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-compression": "^1.0.2",
+    "morgan": "^1.10.1"
+  }
+}
