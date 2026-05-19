@@ -1,0 +1,21 @@
+{
+  "name": "clase-3-artillery",
+  "version": "1.0.0",
+  "description": "Load testing: usuarios en la sección de preguntas de un producto e-commerce",
+  "type": "module",
+  "scripts": {
+    "start:servidor": "npm install --prefix servidor && node servidor/src/app.js",
+    "test": "artillery run escenarios/carga.yml",
+    "test:json": "artillery run escenarios/carga.yml -o reportes/ultimo.json",
+    "report:html": "artillery report reportes/ultimo.json -o reportes/ultimo.html",
+    "test:reporte": "npm run test:json && npm run report:html"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "artillery": "1.7.9",
+    "artillery-plugin-metrics-by-endpoint": "1.6.0"
+  },
+  "license": "ISC"
+}

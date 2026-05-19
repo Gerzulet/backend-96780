@@ -1,0 +1,296 @@
+{
+  "info": {
+    "_postman_id": "clase-3-coderhouse-2026",
+    "name": "Clase 3 — APIs (NVM, NPM, Logging, Artillery)",
+    "description": "Colección para probar manualmente los servidores de clase_3.\n\n**Importar en Postman:** File → Import → este archivo.\n\n**Puertos (levantar cada servidor antes de probar):**\n- `3000` — 03-logging-winston (`npm run start:app`)\n- `3001` — 04-artillery servidor (`npm run start:servidor`)\n- `3002` — 02 app-consume-paquete (`npm start`)\n\nVariables de colección: `baseUrl_logging`, `baseUrl_artillery`, `baseUrl_paquete`, `sku`, `cartId`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl_logging",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "baseUrl_artillery",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "baseUrl_paquete",
+      "value": "http://localhost:3002"
+    },
+    {
+      "key": "sku",
+      "value": "zapatilla-running-pro"
+    },
+    {
+      "key": "sku_catalog",
+      "value": "ZAP-001"
+    },
+    {
+      "key": "sku_sin_stock",
+      "value": "AUR-200"
+    },
+    {
+      "key": "cartId",
+      "value": "cart-42"
+    },
+    {
+      "key": "orderId",
+      "value": "ord-demo-1"
+    },
+    {
+      "key": "preguntaId",
+      "value": "preg-1"
+    }
+  ],
+  "item": [
+    {
+      "name": "04 — Artillery (preguntas producto :3001)",
+      "description": "Servidor: `04-artillery` → `npm run start:servidor`\n\nMismo flujo que `escenarios/carga.yml`. Morgan imprime cada request en la terminal del servidor.",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_artillery}}/health"
+          }
+        },
+        {
+          "name": "Ver ficha del producto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_artillery}}/api/productos/{{sku}}"
+          }
+        },
+        {
+          "name": "Listar preguntas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_artillery}}/api/productos/{{sku}}/preguntas"
+          }
+        },
+        {
+          "name": "Ver detalle de pregunta",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_artillery}}/api/productos/{{sku}}/preguntas/{{preguntaId}}"
+          }
+        },
+        {
+          "name": "Publicar pregunta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"autor\": \"Usuario Postman\",\n  \"texto\": \"¿Cuánto demora el envío a CABA?\"\n}"
+            },
+            "url": "{{baseUrl_artillery}}/api/productos/{{sku}}/preguntas"
+          }
+        },
+        {
+          "name": "Producto inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_artillery}}/api/productos/sku-inexistente"
+          }
+        },
+        {
+          "name": "Publicar pregunta sin body (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": "{{baseUrl_artillery}}/api/productos/{{sku}}/preguntas"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 — Logging Winston (e-commerce :3000)",
+      "description": "Servidor: `03-logging-winston` → `npm run start:app`\n\nRevisar consola y `logs/app.log`. Checkout es lento (~900 ms).",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/health"
+          }
+        },
+        {
+          "name": "Catálogo — listar productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/api/catalog/products"
+          }
+        },
+        {
+          "name": "Catálogo — producto por SKU",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/api/catalog/products/{{sku_catalog}}"
+          }
+        },
+        {
+          "name": "Inventario — sin stock (409)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/api/inventory/{{sku_sin_stock}}"
+          }
+        },
+        {
+          "name": "Carrito — agregar ítem",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"{{sku_catalog}}\",\n  \"qty\": 2,\n  \"cartId\": \"{{cartId}}\"\n}"
+            },
+            "url": "{{baseUrl_logging}}/api/cart/items"
+          }
+        },
+        {
+          "name": "Checkout (lento)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartId\": \"{{cartId}}\",\n  \"paymentMethod\": \"card\"\n}"
+            },
+            "url": "{{baseUrl_logging}}/api/checkout"
+          }
+        },
+        {
+          "name": "Pedido — consultar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/api/orders/{{orderId}}"
+          }
+        },
+        {
+          "name": "Pedido — cancelar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"changed_mind\"\n}"
+            },
+            "url": "{{baseUrl_logging}}/api/orders/{{orderId}}/cancel"
+          }
+        },
+        {
+          "name": "Admin audit-legacy (anti-patrón console.log)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_logging}}/api/admin/audit-legacy"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 — App consume paquete npm (:3002)",
+      "description": "Servidor: `02-package-managers/app-consume-paquete` → `npm start`\n\nRequiere paquete `coderhouse-clase3-operaciones` publicado o instalado.",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl_paquete}}/health"
+          }
+        },
+        {
+          "name": "Calc — suma, resta, producto, cociente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl_paquete}}/api/calc?a=10&b=5",
+              "host": ["{{baseUrl_paquete}}"],
+              "path": ["api", "calc"],
+              "query": [
+                { "key": "a", "value": "10" },
+                { "key": "b", "value": "5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Calc — división por cero (400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl_paquete}}/api/calc?a=10&b=0",
+              "host": ["{{baseUrl_paquete}}"],
+              "path": ["api", "calc"],
+              "query": [
+                { "key": "a", "value": "10" },
+                { "key": "b", "value": "0" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Promedio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valores\": [2, 4, 6, 8]\n}"
+            },
+            "url": "{{baseUrl_paquete}}/api/promedio"
+          }
+        }
+      ]
+    }
+  ]
+}

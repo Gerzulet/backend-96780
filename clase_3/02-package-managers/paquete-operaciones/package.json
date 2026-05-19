@@ -1,0 +1,31 @@
+{
+  "name": "coderhouse-clase-operaciones",
+  "version": "1.0.0",
+  "description": "Operaciones aritméticas básicas — paquete de ejemplo para publicar en npm (clase 3)",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "node test/smoke.js"
+  },
+  "keywords": [
+    "coderhouse",
+    "clase3",
+    "operaciones",
+    "aritmetica"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TU_USUARIO/coderhouse-clase3-operaciones.git"
+  }
+}

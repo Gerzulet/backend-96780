@@ -1,0 +1,14 @@
+{
+  "name": "clase-3-01-nvm",
+  "version": "1.0.0",
+  "description": "Ejemplos NVM: versión de Node por proyecto y comandos habituales",
+  "type": "module",
+  "scripts": {
+    "demo:version": "node ejemplos/01-version-actual.js",
+    "demo:features": "node ejemplos/02-feature-por-version.js",
+    "demo:proyecto:install": "npm install --prefix proyecto-requiere-node-22",
+    "demo:proyecto:start": "npm start --prefix proyecto-requiere-node-22"
+  },
+  "keywords": ["nvm", "node-version"],
+  "license": "ISC"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "app-consume-paquete",
+  "version": "1.0.0",
+  "description": "App Express que consume coderhouse-clase3-operaciones desde npm",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
+  "dependencies": {
+    "coderhouse-clase-operaciones": "^1.0.0",
+    "express": "^5.2.1"
+  },
+  "license": "ISC"
+}

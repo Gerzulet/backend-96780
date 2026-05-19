@@ -1,0 +1,13 @@
+{
+  "name": "clase-3-artillery-servidor",
+  "version": "1.0.0",
+  "description": "API e-commerce: preguntas y respuestas de producto",
+  "type": "module",
+  "main": "src/app.js",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  },
+  "license": "ISC"
+}

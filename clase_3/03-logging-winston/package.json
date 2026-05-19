@@ -1,0 +1,21 @@
+{
+  "name": "clase-3-logging-winston",
+  "version": "1.0.0",
+  "description": "Logging: Winston (middleware + negocio), Morgan (HTTP), demo e-commerce",
+  "type": "module",
+  "scripts": {
+    "demo:console": "node ejemplos/01-console-problemas.js",
+    "demo:niveles": "node ejemplos/02-winston-niveles.js",
+    "demo:transportes": "node ejemplos/03-winston-transportes.js",
+    "start:app": "node app-express/src/app.js",
+    "dev:app": "node --watch app-express/src/app.js"
+  },
+  "dependencies": {
+    "bcrypto": "^5.5.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1",
+    "winston": "^3.17.0"
+  },
+  "license": "ISC"
+}

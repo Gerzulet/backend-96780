@@ -1,0 +1,16 @@
+{
+  "name": "ecommerce-package-json-ejemplo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Referencia de versionado semver en un stack típico de e-commerce (sin código de app)",
+  "_nota": "Los comentarios de cada dependencia están en _semver_guia. npm ignora claves que empiezan con _.",
+  "dependencies": {
+    "express": "^5.2.1", // Instalar solo parches y features, no salirse  de version mas importante
+    "dotenv": "~16.4.7", // Instalar parches
+    "cors": "2.8.5", // instalar exactamente esta version
+    "helmet": "^8.0.0",
+    "uuid": "11.1.0",
+    "zod": "^3.24.0",
+    "dayjs": "^1.11.13"
+  },
+}

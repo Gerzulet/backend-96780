@@ -1,0 +1,66 @@
+# =============================================================================
+# Escenario Artillery — usuarios en la sección de preguntas (e-commerce)
+# =============================================================================
+# Ejecutar con el servidor en :3001:  npm run test  (desde 04-artillery/)
+#
+# Estructura del archivo:
+#   config    → parámetros globales (URL base, fases, plugins)
+#   scenarios → qué hace cada "usuario virtual" y en qué orden
+# =============================================================================
+
+config:
+  # URL base: Artillery concatena cada url del flow (ej. target + "/health")
+  target: "http://localhost:3001"
+
+  plugins:
+    # Paquete: artillery-plugin-metrics-by-endpoint
+    # Desglosa latencia y códigos HTTP por endpoint (o por name: de cada paso)
+    metrics-by-endpoint:
+      # true → agrupa por el campo "name:" de cada get/post (más legible en clase)
+      # false → agrupa por path completo de la URL
+      useOnlyRequestNames: true
+
+  # phases: cómo evoluciona la carga en el tiempo
+  # Cada fase corre en secuencia; al terminar una, empieza la siguiente.
+  phases:
+    # Fase 1 — subida suave (evita golpear el servidor de golpe al inicio)
+    - duration: 10          # segundos que dura esta fase
+      arrivalRate: 2        # usuarios virtuales nuevos por segundo
+      name: "Warm-up"       # etiqueta en el reporte (consola / JSON / HTML)
+
+    # Fase 2 — carga mayor, la que queremos medir con más tráfico
+    - duration: 20
+      arrivalRate: 5
+      name: "Carga sostenida"
+
+# scenarios: uno o más "tipos de usuario". Cada usuario ejecuta flow en orden.
+scenarios:
+  - name: "Consultar producto y sección de preguntas"  # nombre del escenario en reportes
+
+    # flow: pasos que repite cada usuario virtual (como un script de navegación)
+    flow:
+      - get:
+          url: "/health"
+          name: "Health check"   # usado por metrics-by-endpoint si useOnlyRequestNames: true
+
+      - get:
+          url: "/api/productos/zapatilla-running-pro"
+          name: "Ver ficha del producto"
+
+      - get:
+          url: "/api/productos/zapatilla-running-pro/preguntas"
+          name: "Listar preguntas"
+
+      # think: pausa en segundos (simula lectura antes del siguiente paso)
+      - think: 1
+
+      - get:
+          url: "/api/productos/zapatilla-running-pro/preguntas/preg-1"
+          name: "Ver detalle de pregunta"
+
+      - post:
+          url: "/api/productos/zapatilla-running-pro/preguntas"
+          name: "Publicar pregunta"
+          json:                    # body JSON (Content-Type application/json)
+            autor: "Usuario demo"
+            texto: "¿Cuánto demora el envío a CABA?"
