@@ -1,0 +1,19 @@
+{
+  "name": "clase-4-cluster",
+  "version": "1.0.0",
+  "description": "Cluster nativo de Node.js — operación sencilla vs compleja con Artillery",
+  "type": "module",
+  "scripts": {
+    "start": "npm install --prefix servidor && node servidor/src/app.js",
+    "start:single": "npm install --prefix servidor && ETAPA=single node servidor/src/app.js",
+    "test:sencilla": "artillery run escenarios/operacion-sencilla.yml",
+    "test:compleja": "artillery run escenarios/operacion-compleja.yml"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "artillery": "1.7.9"
+  },
+  "license": "ISC"
+}

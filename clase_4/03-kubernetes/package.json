@@ -1,0 +1,16 @@
+{
+  "name": "clase-4-kubernetes",
+  "version": "1.0.0",
+  "description": "Orquestación con Minikube — kubeusers + Mongo",
+  "private": true,
+  "scripts": {
+    "start": "npm install --prefix servidor && node servidor/src/app.js",
+    "docker:build": "docker build -t kubeusers:local .",
+    "k8s:apply": "kubectl apply -f k8s/mongo.yaml && kubectl apply -f k8s/kubeusers.yaml",
+    "k8s:resources": "bash scripts/k8s-resources.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "ISC"
+}

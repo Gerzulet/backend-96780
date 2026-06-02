@@ -1,0 +1,13 @@
+config:
+  target: "http://localhost:3002"
+  phases:
+    - duration: 15
+      arrivalRate: 20
+      name: "Carga operacion sencilla"
+
+scenarios:
+  - name: "Operacion sencilla"
+    flow:
+      - get:
+          url: "/operacion-sencilla"
+          name: "Operacion sencilla"

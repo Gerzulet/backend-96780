@@ -1,0 +1,17 @@
+{
+  "name": "clase4-kube-servidor",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "sharp": "^0.34.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

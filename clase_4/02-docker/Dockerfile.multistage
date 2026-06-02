@@ -1,0 +1,30 @@
+# Variante didáctica multistage (imagen final más chica que el single-stage)
+# docker build -f Dockerfile.multistage -t clase4-servidor:multistage .
+## EL objetivo es que la imagen final sea mas chica que el single-stage (dockerfile normal)
+## Cada stage, que empieza  con FROM, deja un artefacto que luego puede ser utilizado por el siguiente stage, ver lineas 25 y 27
+FROM node:22 AS builder
+LABEL clase4.etapa="builder"
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y libvips-dev && rm -rf /var/lib/apt/lists/*
+
+COPY package*.json ./
+RUN npm ci
+COPY src ./src
+
+FROM node:22-alpine AS runtime
+LABEL clase4.etapa="runtime"
+LABEL clase4.variante="multistage"
+
+WORKDIR /app
+
+RUN apk add --no-cache vips 
+# node:22-alpine ocupa apk add para agregar dependencias ya que no posee apt-get
+
+COPY package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/src ./src
+
+EXPOSE 3000
+CMD ["node", "src/app.js"]

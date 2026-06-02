@@ -1,0 +1,22 @@
+{
+  "name": "clase4-docker-servidor",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/app.js",
+    "docker:build": "docker build -t clase4-servidor:single .",
+    "docker:build:multistage": "docker build -f Dockerfile.multistage -t clase4-servidor:multistage .",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:down:volumes": "docker compose down -v"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "sharp": "^0.34.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

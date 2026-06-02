@@ -1,0 +1,13 @@
+config:
+  target: "http://localhost:3002"
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      name: "Carga operacion compleja"
+
+scenarios:
+  - name: "Operacion compleja"
+    flow:
+      - get:
+          url: "/operacion-compleja"
+          name: "Operacion compleja"
